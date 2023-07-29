@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  gitlab:
+    image: 'gitlab/gitlab-ce:16.2.1-ce.0'
+    hostname: 'gitlab.dck.rumah.lan'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://gitlab.dck.rumah.lan'
+    ports:
+      - '80:80'
+      - '443:443'
+        #- '22:22'
+    volumes:
+      - '/shared_docker/gitlab/config:/etc/gitlab'
+        #- '/shared_docker/gitlab/logs:/var/log/gitlab'
+      - '/shared_docker/gitlab/data:/var/opt/gitlab'
+
+    networks:
+      - gitlab-net
+
+  runner:
+    image: 'gitlab/gitlab-runner:alpine3.17'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '/shared_docker/gitrunner/etc:/etc/gitlab-runner'
+    networks:
+      - gitlab-net
+
+networks:
+  gitlab-net:
+    driver: overlay
