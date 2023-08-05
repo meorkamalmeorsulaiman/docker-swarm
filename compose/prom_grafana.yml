@@ -31,6 +31,7 @@ services:
         target: 9090
     volumes:
       - /shared_docker/prometheus:/etc/prometheus
+      - /shared_docker/prometheus/data:/prometheus
 
   grafana:
     image: grafana/grafana
