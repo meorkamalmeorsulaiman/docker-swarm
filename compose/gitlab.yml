@@ -24,6 +24,8 @@ services:
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
       - '/shared_docker/gitrunner/etc:/etc/gitlab-runner'
+      - '/shared_docker/gitrunner/home:/home/gitlab-runner'
+      - '/shared_docker/gitrunner/docker-machine-config:/root/.docker/machine'
     networks:
       - gitlab-net
 

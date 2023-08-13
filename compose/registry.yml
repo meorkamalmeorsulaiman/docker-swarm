@@ -1,0 +1,18 @@
+version: '3'
+
+networks:
+  registry-net:
+    driver: overlay
+
+services:
+  registry:
+    image: registry:latest
+    ports:
+    - "5000:5000"
+    environment:
+      REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /data
+    volumes:
+      - '/shared_docker/registry/data:/data'
+      - '/shared_docker/registry/registry:/var/lib/registry'
+    networks:
+      - registry-net
