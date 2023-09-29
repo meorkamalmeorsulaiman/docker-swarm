@@ -14,5 +14,6 @@ services:
     volumes:
       - '/shared_docker/registry/data:/data'
       - '/shared_docker/registry/registry:/var/lib/registry'
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
     networks:
       - registry-net
